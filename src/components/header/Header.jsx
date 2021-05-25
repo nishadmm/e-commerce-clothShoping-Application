@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/4.1 crown.svg';
 import './Header.style.scss'
 
-const Header = () => {
+import { auth } from '../../firebase/Firebase.utils'
+
+const Header = ({ currentUser }) => {
   return (
     <div className='header'>
       <Link className="logo-container" to='/'>
@@ -17,6 +19,13 @@ const Header = () => {
         <Link to="/contact" className="option" >
           CONTACT
         </Link>
+        {
+          currentUser ? (
+            <div className="option" onClick={() => auth.signOut() } > Sign Out </div>
+          ) : (
+            <Link to="/signin" className="option">Sign In</Link>
+          )
+        }
       </div>
     </div>
   );
