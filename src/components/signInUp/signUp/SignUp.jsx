@@ -30,8 +30,7 @@ import { auth, getUserDataFromDB } from '../../../firebase/Firebase.utils'
         try {        
             const { user } = await auth.createUserWithEmailAndPassword(email, password)
 
-              const data = await getUserDataFromDB(user, {displayName})
-            //   console.log(data);
+            await getUserDataFromDB(user, {displayName})
             
             this.setState({
                 displayName: '',

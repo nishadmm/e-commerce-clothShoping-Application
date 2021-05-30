@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux'
 
 import Home from './pages/home/Home';
 import ShopPage from './pages/shop/ShopPage';
@@ -9,10 +11,10 @@ import './App.css';
 
 import { auth, getUserDataFromDB } from './firebase/Firebase.utils'
 
-const App = () => {
+import { setCurrentUser } from './redux/actions/UserAction'
 
-  const [userData, setUserData] = useState(null)
-  // const [unsbscribeFromAuth, setUnsbscribeFromAuth] = useState(() => null)
+const App = ({ setCurrentUser }) => {
+
 
   useEffect(() => {
     const setUnsbscribeFromAuth = () => {
@@ -20,35 +22,42 @@ const App = () => {
         if(user) {
           const dataFromDB = await getUserDataFromDB(user)
           dataFromDB.onSnapshot(snapshot => {
-            setUserData({
+            setCurrentUser({
               id: snapshot.id,
               ...snapshot.data()
             })
           })
         } else {
-          setUserData(user)
+          setCurrentUser(user)
         }
       })
     }
-    return(
+    return (
       setUnsbscribeFromAuth()
     )
     // eslint-disable-next-line
   }, [])
-  console.log(userData)
   
   return (
-    <Router>
-      <div>
-        <Header  userData={userData} />
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/shop' component={ShopPage} />
-          <Route exact path='/signin' component={SignInUp} />
-        </Switch>
-      </div>
-    </Router>
+      <Router>
+        <div>
+          <Header/>
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path='/shop' component={ShopPage} />
+            <Route exact path='/signin' component={SignInUp} />
+          </Switch>
+        </div>
+      </Router>
   );
 };
 
-export default App;
+App.propTypes = {
+  setCurrentUser: PropTypes.func.isRequired,
+}
+
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+})
+
+export default connect(null, mapDispatchToProps )(App);
