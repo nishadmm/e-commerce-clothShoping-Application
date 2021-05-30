@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 
 import { ReactComponent as Logo } from '../../assets/4.1 crown.svg';
@@ -6,7 +7,7 @@ import './Header.style.scss'
 
 import { auth } from '../../firebase/Firebase.utils'
 
-const Header = ({ currentUser }) => {
+const Header = ({ userData }) => {
   return (
     <div className='header'>
       <Link className="logo-container" to='/'>
@@ -20,15 +21,19 @@ const Header = ({ currentUser }) => {
           CONTACT
         </Link>
         {
-          currentUser ? (
-            <div className="option" onClick={() => auth.signOut() } > Sign Out </div>
-          ) : (
+          !userData ? (
             <Link to="/signin" className="option">Sign In</Link>
+          ) : (
+            <div className="option" onClick={() => auth.signOut()} >Sign Out</div>
           )
         }
       </div>
     </div>
   );
 };
+
+Header.propTypes = {
+  userData: PropTypes.object
+}
 
 export default Header;
