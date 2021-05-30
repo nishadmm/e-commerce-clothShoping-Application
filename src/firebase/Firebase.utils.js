@@ -24,7 +24,7 @@ provider.setCustomParameters({ 'prompt': 'select_account', 'login_hint': 'user@e
 export const signInWithGoogle = () => auth.signInWithPopup(provider)
 
 // Store in firrstore
-export const  getUserDataFromDB = async (userData) => {
+export const  getUserDataFromDB = async (userData, additionalInfo) => {
     if(!userData) return
 
     const userRef = firestore.doc(`user/${userData.uid}`)
@@ -39,7 +39,8 @@ export const  getUserDataFromDB = async (userData) => {
             displayName,
             email,
             photoURL,
-            createdAt
+            createdAt,
+            ...additionalInfo
         })
     }
     return userRef
