@@ -1,12 +1,10 @@
-import { createStore, applyMiddleware } from 'redux'
-import logger from 'redux-logger'
+import { createStore, applyMiddleware } from "redux";
+import logger from "redux-logger";
 
-import RootReducer from './reducers/RootReducer'
+import RootReducer from "./reducers/RootReducer";
 
-const middleWares = [
-    logger
-]
+const middleWares = [logger];
 
-const Store = createStore(RootReducer, applyMiddleware(...middleWares))
+const Store = createStore(RootReducer, applyMiddleware(...middleWares));
 
-export default Store
+export default Store;
