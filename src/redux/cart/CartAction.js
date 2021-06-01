@@ -6,5 +6,15 @@ export const toggleCartDropdown = () => ({
 
 export const addItem = (item) => ({
   type: CartActionTypes.ADD_ITEM,
-  payload: item
+  payload: item,
 });
+
+export const removeItem = (id) => ({
+  type: CartActionTypes.REMOVE_ITEM,
+  payload: id,
+});
+
+export const decreaseQuantity = (id) => ({
+  type: CartActionTypes.DECREASE_QUANTITY,
+  payload: id
+})

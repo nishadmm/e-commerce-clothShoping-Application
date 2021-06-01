@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 
 import Home from "./pages/home/Home";
 import ShopPage from "./pages/shop/ShopPage";
+import CheckOut from "./pages/checkout/CheckOut";
 import Header from "./components/header/Header";
 import SignInUp from "./components/signInUp/SignInUp";
 import { auth, getUserDataFromDB } from "./firebase/Firebase.utils";
@@ -45,6 +46,7 @@ const App = ({ setCurrentUser, currentUser }) => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={CheckOut} />
           <Route
             exact
             path="/signin"
