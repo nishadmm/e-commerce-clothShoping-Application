@@ -12,11 +12,10 @@ import Home from "./pages/home/Home";
 import ShopPage from "./pages/shop/ShopPage";
 import Header from "./components/header/Header";
 import SignInUp from "./components/signInUp/SignInUp";
-import "./App.css";
-
 import { auth, getUserDataFromDB } from "./firebase/Firebase.utils";
-
-import { setCurrentUser } from "./redux/actions/UserAction";
+import { setCurrentUser } from "./redux/user/UserAction";
+import { selectCurrentUser } from "./redux/user/UserSelector";
+import "./App.css";
 
 const App = ({ setCurrentUser, currentUser }) => {
   useEffect(() => {
@@ -62,8 +61,8 @@ App.propTypes = {
   currentUser: PropTypes.object,
 };
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser,
+const mapStateToProps = (state) => ({
+  currentUser: selectCurrentUser(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
