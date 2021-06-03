@@ -10,7 +10,7 @@ import ShopReducer from '../shop/ShopReducer'
 const PersistConfig = {
   key: "root",
   storage,
-  whiteList: ["cart"],
+  whitelist: ['cart'],
 };
 
 const rootReducer = combineReducers({
