@@ -14,7 +14,7 @@ export const AddItemToCart = (cartItems, cartItemToAdd) => {
   return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
 };
 
-export const decreaseQunatityOfItem = (cartItems, idOfSelectedcartItem) => {
+export const decreaseQuantityOfItem = (cartItems, idOfSelectedcartItem) => {
 
   const existingCartItem = cartItems.find(cartItem => cartItem.id === idOfSelectedcartItem)
 

@@ -1,8 +1,8 @@
 import React from "react";
 
 import SignIn from "./SignIn";
-import "./SignInUp.style.scss";
 import SignUp from "./signUp/SignUp";
+import "./SignInUp.style.scss";
 
 const SignInUp = () => {
   return (

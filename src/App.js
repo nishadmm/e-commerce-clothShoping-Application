@@ -41,19 +41,17 @@ const App = ({ setCurrentUser, currentUser }) => {
 
   return (
     <Router>
-      <div>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/shop" component={ShopPage} />
-          <Route exact path="/checkout" component={CheckOut} />
-          <Route
-            exact
-            path="/signin"
-            render={() => (currentUser ? <Redirect to="/" /> : <SignInUp />)}
-          />
-        </Switch>
-      </div>
+      <Header />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/shop" component={ShopPage} />
+        <Route exact path="/checkout" component={CheckOut} />
+        <Route
+          exact
+          path="/signin"
+          render={() => (currentUser ? <Redirect to="/" /> : <SignInUp />)}
+        />
+      </Switch>
     </Router>
   );
 };
