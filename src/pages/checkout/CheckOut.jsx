@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 
 import { SelectCartItems, cartTotalPrice } from "../../redux/cart/CartSelector";
 import CheckOutItem from "./checkOutItem/CheckOutItem";
+import StripeButton from '../../components/stripeButton/StripeButton'
 import "./CheckOut.style.scss";
 
 const CheckOut = ({ cartItems, totalPrice }) => {
@@ -34,6 +35,12 @@ const CheckOut = ({ cartItems, totalPrice }) => {
       <div className="total">
         <span>Total $ {totalPrice} </span>
       </div>
+      <div className="test-warning">
+        * Please use followind credentials for test payment *
+        <br />
+        4242 4242 4242 4242 - Exp : 01/24 - CW : 123 
+      </div>
+      <StripeButton price={totalPrice} />
     </div>
   );
 };
