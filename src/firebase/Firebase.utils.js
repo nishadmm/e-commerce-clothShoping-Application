@@ -25,7 +25,7 @@ provider.setCustomParameters({
 });
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
-// Store user in firrstore
+// Store user in fireStore
 export const getUserDataFromDB = async (userData, additionalInfo) => {
   if (!userData) return;
 
@@ -45,6 +45,23 @@ export const getUserDataFromDB = async (userData, additionalInfo) => {
     });
   }
   return userRef;
+};
+
+// Add shop data to firestore
+export const AddNewCollectionAndDocuments = async (
+  collectionKey,
+  ObjectsToAdd
+) => {
+  const CollectionRef = firestore.collection(collectionKey);
+
+  const batch = firestore.batch();
+  ObjectsToAdd.forEach((obj) => {
+    const newDocRef = CollectionRef.doc();
+
+    batch.set(newDocRef, obj);
+  });
+
+  return await batch.commit();
 };
 
 export default firebase;

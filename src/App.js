@@ -13,12 +13,18 @@ import ShopPage from "./pages/shop/ShopPage";
 import CheckOut from "./pages/checkout/CheckOut";
 import Header from "./components/header/Header";
 import SignInUp from "./components/signInUp/SignInUp";
-import { auth, getUserDataFromDB } from "./firebase/Firebase.utils";
+import {
+  auth,
+  getUserDataFromDB,
+  AddNewCollectionAndDocuments,
+} from "./firebase/Firebase.utils";
 import { setCurrentUser } from "./redux/user/UserAction";
 import { selectCurrentUser } from "./redux/user/UserSelector";
+import { selectShopCollectionsForPreview } from "./redux/shop/ShopSelectors";
 import "./App.css";
+import { createStructuredSelector } from "reselect";
 
-const App = ({ setCurrentUser, currentUser }) => {
+const App = ({ setCurrentUser, currentUser, collectionsArray }) => {
   useEffect(() => {
     const setUnsbscribeFromAuth = () => {
       auth.onAuthStateChanged(async (user) => {
@@ -35,6 +41,10 @@ const App = ({ setCurrentUser, currentUser }) => {
         }
       });
     };
+    AddNewCollectionAndDocuments(
+      "collection",
+      collectionsArray.map(({ title, items }) => ({ title, items }))
+    );
     return setUnsbscribeFromAuth();
     // eslint-disable-next-line
   }, []);
@@ -61,8 +71,13 @@ App.propTypes = {
   currentUser: PropTypes.object,
 };
 
-const mapStateToProps = (state) => ({
-  currentUser: selectCurrentUser(state),
+// const mapStateToProps = (state) => ({
+//   currentUser: selectCurrentUser(state),
+//   collectionsArray: selectShopCollectionsForPreview
+// });
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  collectionsArray: selectShopCollectionsForPreview,
 });
 
 const mapDispatchToProps = (dispatch) => ({

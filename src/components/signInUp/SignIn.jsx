@@ -59,7 +59,7 @@ export default class SignIn extends Component {
             required
           />
           <div className="buttons">
-            <CustomButton type="submit"> Sign In </CustomButton>
+            <CustomButton type="submit" > Sign In </CustomButton>
             <CustomButton
               googleSignInBtn
               type="button"
